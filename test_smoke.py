@@ -13,6 +13,14 @@ class TestSmoke(unittest.TestCase):
         self.assertTrue(smoke_file.is_file(), f"{smoke_file} does not exist")
         self.assertEqual(smoke_file.read_text(encoding="utf-8"), "smoke-ok")
 
+    def test_readme_purpose(self):
+        readme = Path(__file__).resolve().parent / "README.md"
+        self.assertTrue(readme.is_file(), f"{readme} does not exist")
+        content = readme.read_text(encoding="utf-8")
+        self.assertIn("## Purpose", content)
+        self.assertIn("disposable", content)
+        self.assertIn("throwaway", content)
+
 
 if __name__ == "__main__":
     unittest.main()
